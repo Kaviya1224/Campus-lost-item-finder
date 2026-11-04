@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CampusFind AI - Register</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="user-icon">👥</div>
+
+        <h1 class="brand-title">CampusFind AI</h1>
+
+        <h2 class="register-title">Create Your Account</h2>
+
+        <p class="subtitle">Join your campus community</p>
+
+        <!-- Registration Form -->
+        <form action="/register" method="POST">
+
+            <input
+                type="text"
+                name="fullname"
+                placeholder="Full Name"
+                required
+            >
+
+            <input
+                type="email"
+                name="email"
+                placeholder="College Email"
+                required
+            >
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Create Password"
+                minlength="8"
+                required
+            >
+
+            <input
+                type="password"
+                name="confirm_password"
+                placeholder="Confirm Password"
+                minlength="8"
+                required
+            >
+
+            <button type="submit" class="login-btn">REGISTER</button>
+
+        </form>
+
+        <!-- Message from Flask -->
+        {% if message %}
+            <p class="register">{{ message }}</p>
+        {% endif %}
+
+        <p class="register">
+            Already have an account?
+            <a href="/">Login</a>
+        </p>
+
+    </div>
+
+</body>
+</html>
+

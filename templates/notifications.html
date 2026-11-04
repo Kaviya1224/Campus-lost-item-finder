@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>CampusFind AI - Notifications</title>
+
+```
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f7f2;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .container {
+        background: white;
+        padding: 30px;
+        width: 450px;
+        max-width: 90%;
+        margin: auto;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px #ccc;
+    }
+
+    .bell {
+        font-size: 50px;
+    }
+
+    h2 {
+        color: #218838;
+    }
+
+    .message {
+        background: #e8f5e9;
+        padding: 15px;
+        border-radius: 10px;
+        margin: 20px 0;
+        text-align: left;
+    }
+
+    .score {
+        color: #218838;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .button {
+        display: inline-block;
+        background: #218838;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        text-decoration: none;
+        margin: 8px;
+        cursor: pointer;
+    }
+
+    .button:hover {
+        background: #176b2c;
+    }
+
+    .empty {
+        color: gray;
+        padding: 20px;
+    }
+</style>
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+
+<div class="bell">🔔</div>
+
+<h2>Notifications</h2>
+
+<p>You have {{ unread_count }} unread notification(s).</p>
+
+{% for notification in notifications %}
+
+    <div class="message">
+
+        <h3>🎯 Possible Match Found!</h3>
+
+        <p>{{ notification['message'] }}</p>
+
+        <p>
+            <b>Lost Item:</b>
+            {{ notification['lost_item_name'] }}
+        </p>
+
+        <p>
+            <b>Found Item:</b>
+            {{ notification['found_item_name'] }}
+        </p>
+
+        <p class="score">
+            Matching Score: {{ "%.2f"|format(notification['similarity']) }}%
+        </p>
+
+        {% if notification['is_read'] == 0 %}
+            <p><b>New Notification</b></p>
+        {% else %}
+            <p>Already viewed</p>
+        {% endif %}
+
+        <a class="button"
+           href="{{ url_for('match_details',
+           lost_id=notification['lost_item_id'],
+           found_id=notification['found_item_id']) }}">
+            View Match Details
+        </a>
+
+    </div>
+
+{% else %}
+
+    <div class="empty">
+        <h3>No notifications yet!</h3>
+        <p>You'll see a notification when a possible match is found.</p>
+    </div>
+
+{% endfor %}
+
+<a href="{{ url_for('home') }}" class="button">
+    ← Back to Home
+</a>
+```
+
+</div>
+
+</body>
+</html>

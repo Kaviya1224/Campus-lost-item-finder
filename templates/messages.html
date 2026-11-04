@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Finder - CampusFind AI</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .chat-container {
+            width: 90%;
+            max-width: 650px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #2563eb;
+            text-align: center;
+        }
+
+        .item-details {
+            background: #eaf2ff;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .chat-box {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            max-width: 75%;
+            overflow-wrap: anywhere;
+        }
+
+        .sent {
+            background: #dbeafe;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .received {
+            background: #eeeeee;
+            margin-right: auto;
+        }
+
+        textarea {
+            width: 96%;
+            height: 65px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            resize: vertical;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            padding: 11px 22px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 15px;
+            color: #2563eb;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="chat-container">
+
+    <h2>💬 Contact Finder</h2>
+
+    <div class="item-details">
+        <p><b>Lost Item:</b> {{ lost_item.item_name }}</p>
+        <p><b>Found Item:</b> {{ found_item.item_name }}</p>
+        <p><b>Contact:</b> {{ other_user.fullname }}</p>
+    </div>
+
+    <h3>Messages</h3>
+
+    <div class="chat-box">
+
+        {% for msg in chat_messages %}
+
+            {% if msg.sender_id == current_user %}
+
+                <div class="message sent">
+                    {{ msg.message }}
+                </div>
+
+            {% else %}
+
+                <div class="message received">
+                    {{ msg.message }}
+                </div>
+
+            {% endif %}
+
+        {% else %}
+
+            <p style="text-align:center; color:gray;">
+                No messages yet. Start a conversation!
+            </p>
+
+        {% endfor %}
+
+    </div>
+
+    <form method="POST"
+          action="{{ url_for('messages',
+          lost_id=lost_item.id,
+          found_id=found_item.id) }}">
+
+        <textarea name="message"
+                  placeholder="Type your message here..."
+                  required></textarea>
+
+        <button type="submit">Send Message</button>
+
+    </form>
+
+    <a class="back-btn"
+       href="{{ url_for('match_details',
+       lost_id=lost_item.id,
+       found_id=found_item.id) }}">
+        ← Back to Match Details
+    </a>
+
+</div>
+
+</body>
+</html>

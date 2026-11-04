@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile - CampusFind AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .profile-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #E8F0E6;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .profile-details {
+            text-align: left;
+            margin-top: 25px;
+            line-height: 2;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="profile-container">
+
+        <h1>👤 My Profile</h1>
+
+        <div class="profile-details">
+            <p><b>Full Name:</b> {{ user.fullname }}</p>
+            <p><b>Email:</b> {{ user.email }}</p>
+        </div>
+
+        <h3>My Lost Items: {{ lost_count }}</h3>
+        <h3>My Found Items: {{ found_count }}</h3>
+
+        <a href="/settings" class="back-btn">← Back to Settings</a>
+
+    </div>
+
+</body>
+</html>

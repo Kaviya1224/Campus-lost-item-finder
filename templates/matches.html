@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>AI Item Matches - CampusFind AI</title>
+
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+    .match-card {
+        background: #E8F0E6;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 12px;
+        text-align: left;
+    }
+
+    .details-btn {
+        display: inline-block;
+        background: #218838;
+        color: white;
+        padding: 10px 18px;
+        margin-top: 12px;
+        border-radius: 7px;
+        text-decoration: none;
+    }
+
+    .details-btn:hover {
+        background: #176b2c;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="login-container" style="width:650px;">
+
+```
+<h1>CampusFind AI</h1>
+
+<h2>AI Item Matching</h2>
+
+<p class="subtitle">
+    Possible Lost and Found Item Matches
+</p>
+
+{% if matching_items %}
+
+    {% for match in matching_items %}
+
+    <div class="match-card">
+
+        <h3>Lost Item</h3>
+
+        <p><b>Name:</b>
+            {{ match.lost['item_name'] }}</p>
+
+        <p><b>Description:</b>
+            {{ match.lost['description'] }}</p>
+
+        <p><b>Location:</b>
+            {{ match.lost['location'] }}</p>
+
+        <hr>
+
+        <h3>Found Item</h3>
+
+        <p><b>Name:</b>
+            {{ match.found['item_name'] }}</p>
+
+        <p><b>Description:</b>
+            {{ match.found['description'] }}</p>
+
+        <p><b>Location:</b>
+            {{ match.found['location'] }}</p>
+
+        <h3>
+            Similarity: {{ match.score }}%
+        </h3>
+
+        <a class="details-btn"
+           href="{{ url_for('match_details',
+           lost_id=match.lost['id'],
+           found_id=match.found['id']) }}">
+            View Match Details
+        </a>
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+    <p class="register">
+        No possible matches found yet.
+    </p>
+
+{% endif %}
+
+<p class="register">
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</p>
+
+
+</div>
+
+</body>
+</html>

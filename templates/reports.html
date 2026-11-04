@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Reports - CampusFind AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .reports-container {
+            width: 900px;
+            max-width: 95%;
+            padding: 35px;
+            background: #91B394;
+            border-radius: 20px;
+            margin: 30px auto;
+        }
+
+        .report-section {
+            margin-top: 30px;
+        }
+
+        .report-section h2 {
+            color: #F4F5E9;
+            margin-bottom: 20px;
+        }
+
+        .report-card {
+            background: #E8F0E6;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        .report-card h3 {
+            color: #173D20;
+            margin-bottom: 10px;
+        }
+
+        .report-card p {
+            color: #245C32;
+            margin: 7px 0;
+            font-size: 14px;
+        }
+
+        .report-image {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #173D20;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .empty-message {
+            color: #173D20;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reports-container">
+
+        <h1>CampusFind AI</h1>
+
+        <h2 class="register-title">Lost & Found Reports</h2>
+
+        <p class="subtitle">
+            View all reported lost and found items.
+        </p>
+
+        <!-- Lost Items -->
+        <div class="report-section">
+
+            <h2>Lost Items</h2>
+
+            {% if lost_items %}
+
+                {% for item in lost_items %}
+
+                    <div class="report-card">
+
+                        <h3>{{ item['item_name'] }}</h3>
+
+                        <p><strong>Description:</strong> {{ item['description'] }}</p>
+
+                        <p><strong>Category:</strong> {{ item['category'] }}</p>
+
+                        <p><strong>Last Seen:</strong> {{ item['location'] }}</p>
+
+                        <p><strong>Date Lost:</strong> {{ item['date_lost'] }}</p>
+
+                        {% if item['image'] %}
+                            <img src="{{ url_for('uploaded_file', filename=item['image']) }}"
+                                 class="report-image" alt="Lost item image">
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p class="empty-message">No lost items reported yet.</p>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- Found Items -->
+        <div class="report-section">
+
+            <h2>Found Items</h2>
+
+            {% if found_items %}
+
+                {% for item in found_items %}
+
+                    <div class="report-card">
+
+                        <h3>{{ item['item_name'] }}</h3>
+
+                        <p><strong>Description:</strong> {{ item['description'] }}</p>
+
+                        <p><strong>Category:</strong> {{ item['category'] }}</p>
+
+                        <p><strong>Found Location:</strong> {{ item['location'] }}</p>
+
+                        <p><strong>Date Found:</strong> {{ item['date_found'] }}</p>
+
+                        {% if item['image'] %}
+                            <img src="{{ url_for('uploaded_file', filename=item['image']) }}"
+                                 class="report-image" alt="Found item image">
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p class="empty-message">No found items reported yet.</p>
+
+            {% endif %}
+
+        </div>
+
+        <a href="/home" class="back-link">← Back to Home</a>
+
+    </div>
+
+</body>
+</html>

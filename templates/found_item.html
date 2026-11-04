@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Report Found Item - CampusFind AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="login-container">
+
+        <h1>CampusFind AI</h1>
+
+        <h2 class="register-title">Report Found Item</h2>
+
+        <p class="subtitle">Provide the details of the item you found.</p>
+
+        <form action="/found-item" method="POST" enctype="multipart/form-data">
+
+            <input type="text" name="item_name"
+                   placeholder="Item Name" required>
+
+            <textarea name="description"
+                      placeholder="Item Description" required></textarea>
+
+            <select name="category" required>
+                <option value="">Select Category</option>
+                <option>Electronics</option>
+                <option>Books & Notes</option>
+                <option>ID & Cards</option>
+                <option>Bags</option>
+                <option>Accessories</option>
+                <option>Stationery</option>
+                <option>Clothing</option>
+                <option>Other</option>
+            </select>
+
+            <input type="text" name="location"
+                   placeholder="Found Location" required>
+
+            <label>Date Found</label>
+            <input type="date" name="date_found" required>
+
+            <label>Upload Item Image</label>
+
+            <div class="upload-box">
+
+                <label for="item-image" class="upload-label">
+                    + Select Image
+                </label>
+
+                <input type="file" id="item-image" name="image"
+                       accept="image/png,image/jpeg,image/webp"
+                       hidden required>
+
+                <span id="file-name">No image selected</span>
+
+            </div>
+
+            <button type="submit">SUBMIT FOUND ITEM</button>
+
+        </form>
+
+        {% if message %}
+            <p class="register">{{ message }}</p>
+        {% endif %}
+
+        <p class="register">
+            <a href="/home">Back to Home</a>
+        </p>
+
+    </div>
+
+    <script>
+        document.getElementById("item-image").addEventListener("change", function() {
+            document.getElementById("file-name").textContent =
+                this.files.length ? this.files[0].name : "No image selected";
+        });
+    </script>
+
+</body>
+</html>

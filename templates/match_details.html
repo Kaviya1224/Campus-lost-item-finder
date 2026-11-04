@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>CampusFind AI - Match Details</title>
+
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f7f2;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .container {
+        background: white;
+        width: 450px;
+        max-width: 90%;
+        margin: auto;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px #ccc;
+    }
+
+    h2 {
+        color: #218838;
+    }
+
+    .item {
+        background: #e8f5e9;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 10px;
+    }
+
+    .score {
+        color: #218838;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .action-btn {
+        display: inline-block;
+        background: #218838;
+        color: white;
+        text-decoration: none;
+        padding: 12px 20px;
+        margin: 8px;
+        border-radius: 7px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .action-btn:hover {
+        background: #176b2c;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="container">
+
+```
+<h2>🎯 Match Details</h2>
+
+<div class="item">
+    <h3>Lost Item</h3>
+    <p><b>Item:</b> {{ lost_item['item_name'] }}</p>
+    <p><b>Description:</b> {{ lost_item['description'] }}</p>
+    <p><b>Category:</b> {{ lost_item['category'] }}</p>
+    <p><b>Location:</b> {{ lost_item['location'] }}</p>
+</div>
+
+<div class="item">
+    <h3>Found Item</h3>
+    <p><b>Item:</b> {{ found_item['item_name'] }}</p>
+    <p><b>Description:</b> {{ found_item['description'] }}</p>
+    <p><b>Category:</b> {{ found_item['category'] }}</p>
+    <p><b>Location:</b> {{ found_item['location'] }}</p>
+</div>
+
+<p class="score">
+    AI Matching Score: {{ score }}%
+</p>
+
+<a class="action-btn"
+   href="{{ url_for('messages', lost_id=lost_item['id'], found_id=found_item['id']) }}">
+    💬 Contact Finder
+</a>
+
+<a class="action-btn"
+   href="{{ url_for('share_location', found_id=found_item['id']) }}">
+    📍 Share Location
+</a>
+
+<br>
+
+<a class="action-btn" href="{{ url_for('notifications') }}">
+    ← Back
+</a>
+
+
+</div>
+
+</body>
+</html>

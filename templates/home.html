@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CampusFind AI - Home</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .settings-icon {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 26px;
+            text-decoration: none;
+            background: #E8F0E6;
+            color: #173D20;
+            padding: 8px 12px;
+            border-radius: 50%;
+        }
+
+        .settings-icon:hover {
+            background: #D1E3D0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Settings Icon -->
+    <a href="{{ url_for('settings') }}" class="settings-icon" title="Settings">
+        ⚙️
+    </a>
+
+    <div class="login-container home-container">
+
+        <h1 class="brand-title">CampusFind AI</h1>
+
+        <p class="subtitle">Campus Lost and Found System</p>
+
+        <h2 class="register-title">Welcome!</h2>
+
+        <p class="subtitle">What would you like to do?</p>
+
+        <div class="home-buttons">
+
+            <a href="/lost-item" class="home-btn">
+                LOST ITEM
+            </a>
+
+            <a href="/found-item" class="home-btn">
+                FOUND ITEM
+            </a>
+
+        </div>
+
+        <div class="home-buttons">
+
+            <a href="/reports" class="home-btn">
+                VIEW REPORTS
+            </a>
+
+            <a href="/matches" class="home-btn">
+                AI MATCHES
+            </a>
+
+        </div>
+
+        <!-- Notification Button -->
+        <div class="home-buttons">
+
+            <a href="/notifications" class="home-btn">
+                🔔 NOTIFICATIONS
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
